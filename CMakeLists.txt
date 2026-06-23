@@ -35,3 +35,16 @@ if(OPENFHE_PKE AND OPENFHE_CORE)
 else()
     message(WARNING "⚠️ OpenFHE libraries not found. Header-only mode.")
 endif()
+
+# Additional tests
+add_executable(test_advanced_refresh test_advanced_refresh.cpp)
+target_link_libraries(test_advanced_refresh wideopenfhe ${OPENFHE_PKE} ${OPENFHE_CORE})
+
+add_executable(test_benchmark_30s test_benchmark_30s.cpp)
+target_link_libraries(test_benchmark_30s wideopenfhe ${OPENFHE_PKE} ${OPENFHE_CORE} pthread)
+
+add_executable(test_encrypt_decrypt_chain test_encrypt_decrypt_chain.cpp)
+target_link_libraries(test_encrypt_decrypt_chain wideopenfhe ${OPENFHE_PKE} ${OPENFHE_CORE} pthread)
+
+add_executable(test_rapid_burst test_rapid_burst.cpp)
+target_link_libraries(test_rapid_burst wideopenfhe ${OPENFHE_PKE} ${OPENFHE_CORE} pthread)
