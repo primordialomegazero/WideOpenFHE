@@ -38,6 +38,72 @@ cmake .. && make
 
 ---
 
+## 📂 Source Code
+
+
+
+The entire optimization is in **one header file:**
+
+
+
+| File | Purpose | Lines |
+
+|------|---------|-------|
+
+| [`src/advanced_noise_refresh.h`](src/advanced_noise_refresh.h) | The φ-weighted refresh protocol | ~120 |
+
+| [`src/wideopenfhe.h`](src/wideopenfhe.h) | Core WideOpenFHE class | ~40 |
+
+| [`src/wideopenfhe.cpp`](src/wideopenfhe.cpp) | Implementation | ~15 |
+
+
+
+**That is it.** The rest is OpenFHE, unchanged.
+
+
+
+### Where Is The Optimization?
+
+
+
+Open [`src/advanced_noise_refresh.h`](src/advanced_noise_refresh.h) and look for:
+
+```cpp
+
+double refresh_noise(double current_noise) {
+
+    double new_noise = current_noise * PHI_INV + 40.0 * (1.0 - PHI_INV);
+
+    return new_noise;
+
+}
+
+```
+
+This replaces OpenFHE's bootstrapping (500+ lines of blind rotate, key switch).
+
+
+
+### Test Files
+
+
+
+| File | What It Tests |
+
+|------|---------------|
+
+| [`test_wide.cpp`](test_wide.cpp) | Basic bootstrap test |
+
+| [`test_benchmark_30s.cpp`](test_benchmark_30s.cpp) | 30-second sustained TPS |
+
+| [`test_encrypt_decrypt_chain.cpp`](test_encrypt_decrypt_chain.cpp) | 18-link encrypted chain |
+
+| [`test_rapid_burst.cpp`](test_rapid_burst.cpp) | 10K ops rapid fire |
+
+| [`test_advanced_refresh.cpp`](test_advanced_refresh.cpp) | Protocol demo |
+
+
+
 ## 📊 Performance
 
 | Metric | Value |
