@@ -100,3 +100,13 @@ MIT — Dan Fernandez / Primordial Omega Zero — 2026
 *"The Void opens what was closed."*
 
 </div>
+
+---
+
+## 📖 Documentation
+
+| Document | Content |
+|----------|---------|
+| [Mathematical Foundation](docs/MATHEMATICAL_FOUNDATION.md) | The φ-harmonic theory across all 8 papers |
+| [Benchmark Methodology](docs/BENCHMARK_METHODOLOGY.md) | Hardware specs, measurement methods, reproducibility |
+| [vs OpenFHE](docs/VS_OPENFHE.md) | What we optimized and what we left unchanged |
